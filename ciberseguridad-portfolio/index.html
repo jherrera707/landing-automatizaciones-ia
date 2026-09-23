@@ -13,7 +13,8 @@
 @font-face { font-family:'JB'; src:local('JetBrains Mono'); font-display:block; font-weight:400 600; }
 
 /* ══════════════════ DOC SHELL ══════════════════ */
-html, body { height:100%; background:#000; overflow:hidden; }
+html { scroll-behavior:smooth; }
+html, body { background:#000; overflow-x:hidden; }
 * { margin:0; padding:0; box-sizing:border-box; }
 body {
   font-family:'JB','JetBrains Mono',monospace;
@@ -58,7 +59,7 @@ svg { display:block; }
 .svgdefs { position:absolute; width:0; height:0; overflow:hidden; }
 
 /* ══════════════════ STAGE ══════════════════ */
-.screen { position:fixed; inset:0; overflow:hidden; background:#000; }
+.screen { position:relative; width:100%; height:100vh; min-height:520px; overflow:hidden; background:#000; }
 
 /* ─── Video backgrounds ─── */
 .bg, .bg2 { position:absolute; inset:0; overflow:hidden; pointer-events:none; }
@@ -99,8 +100,8 @@ header {
 }
 .logo svg { width:100%; height:100%; }
 nav {
-  position:absolute; left: calc(482 * var(--s)); top: calc(32 * var(--s)); height: calc(58 * var(--s));
-  display:flex; align-items:center;
+  position:absolute; left: calc(410 * var(--s)); top: calc(32 * var(--s)); height: calc(58 * var(--s));
+  display:flex; align-items:center; gap: calc(34 * var(--s));
 }
 nav a {
   font-family:'JB','JetBrains Mono',monospace;
@@ -109,12 +110,8 @@ nav a {
   line-height: 1;
   color:#fff;
   display:inline-flex; align-items:center; gap: calc(5 * var(--s));
-  margin-left: calc(40 * var(--s));
   transition: color .3s;
 }
-nav a:first-child { margin-left:0; }
-nav a:nth-of-type(2) { margin-left: calc((40 + 53) * var(--s)); }
-nav a:nth-of-type(4) { margin-left: calc((40 + 37) * var(--s)); }
 nav a:hover { color: var(--red); }
 .chev { width: calc(11.6 * var(--s)); height: calc(7.2 * var(--s)); margin-top: calc(-2.6 * var(--s)); }
 .chev svg { width:100%; height:100%; }
@@ -505,6 +502,144 @@ html.intro .hero h1 .ln span { transform: translateY(120%); }
 @media (max-width:599px) {
   .chat { width: calc(100vw - 30px); right: 15px; bottom: calc(88 * var(--s)); }
 }
+
+/* ══════════════════ SCROLL CONTENT SECTIONS ══════════════════ */
+.content { position:relative; z-index:5; background:#050505; }
+.sec { padding: calc(120 * var(--s)) calc(73 * var(--s)); border-top:1px solid rgba(255,255,255,.08); }
+.sec-head .eyebrow {
+  font-family:'JB',monospace; font-weight:400;
+  font-size: calc(13 * var(--s)); letter-spacing:.22em; text-transform:uppercase;
+  color: var(--red); margin-bottom: calc(22 * var(--s));
+}
+.sec-head h2 {
+  font-family:'SG',sans-serif; font-weight:700;
+  font-size: calc(52 * var(--s)); line-height:1.05; letter-spacing:calc(-1.6 * var(--s));
+  color: var(--ink); margin-bottom: calc(24 * var(--s));
+}
+.sec-head p {
+  font-family:'JB',monospace; font-weight:400;
+  font-size: calc(17 * var(--s)); line-height:1.75; color: var(--sub);
+  max-width: calc(640 * var(--s));
+}
+
+/* ─── Slogan ─── */
+.slogan {
+  padding: calc(150 * var(--s)) calc(73 * var(--s));
+  text-align:left;
+  position:relative;
+  background: radial-gradient(60% 100% at 85% 50%, rgba(200,27,28,.12), transparent 70%), #050505;
+}
+.slogan .sl-tag {
+  font-family:'JB',monospace; font-size: calc(13 * var(--s));
+  letter-spacing:.22em; text-transform:uppercase; color: var(--lab);
+  border:1px solid rgba(255,255,255,.18); padding: calc(10 * var(--s)) calc(18 * var(--s));
+  display:inline-block; margin-bottom: calc(34 * var(--s));
+}
+.slogan .sl-big {
+  font-family:'SG',sans-serif; font-weight:700;
+  font-size: calc(58 * var(--s)); line-height:1.08; letter-spacing:calc(-2 * var(--s));
+  color: var(--ink); max-width: calc(980 * var(--s));
+}
+.slogan .sl-big em { font-style:normal; color: var(--red); }
+.slogan .sl-motto {
+  font-family:'JB',monospace; font-size: calc(15 * var(--s)); color: var(--lab);
+  margin-top: calc(30 * var(--s)); letter-spacing:.06em;
+}
+
+/* ─── Services what we sell ─── */
+.grid3 { display:grid; grid-template-columns:repeat(3, 1fr); gap: calc(18 * var(--s)); margin-top: calc(70 * var(--s)); }
+.pick {
+  background:#0a0a0a; border:1px solid rgba(255,255,255,.09);
+  padding: calc(36 * var(--s)) calc(30 * var(--s));
+  position:relative; transition: border-color .35s, background .35s, transform .35s;
+}
+.pick:hover { border-color: var(--red); background:#0e0e0e; transform: translateY(calc(-4 * var(--s))); }
+.pick .pnum {
+  font-family:'JB',monospace; font-size: calc(13 * var(--s)); color: var(--lab);
+  letter-spacing:.16em; margin-bottom: calc(26 * var(--s));
+}
+.pick h3 { font-family:'SG',sans-serif; font-weight:700; font-size: calc(24 * var(--s)); color: var(--ink); margin-bottom: calc(14 * var(--s)); }
+.pick p { font-family:'JB',monospace; font-size: calc(15 * var(--s)); line-height:1.75; color: var(--sub); }
+.pick .pfoot { font-family:'JB',monospace; font-size: calc(12 * var(--s)); color: var(--red); letter-spacing:.14em; text-transform:uppercase; margin-top: calc(24 * var(--s)); }
+
+/* ─── Benefits ─── */
+.grid2 { display:grid; grid-template-columns:repeat(2, 1fr); gap: calc(18 * var(--s)); margin-top: calc(70 * var(--s)); }
+.benefit {
+  display:flex; gap: calc(22 * var(--s)); align-items:flex-start;
+  padding: calc(34 * var(--s)) calc(28 * var(--s));
+  background:#0a0a0a; border:1px solid rgba(255,255,255,.09);
+  transition: border-color .35s, background .35s;
+}
+.benefit:hover { border-color: var(--red); background:#0e0e0e; }
+.benefit .bic { flex:0 0 auto; width: calc(46 * var(--s)); height: calc(46 * var(--s)); background: var(--red); display:flex; align-items:center; justify-content:center; }
+.benefit .bic svg { width: calc(22 * var(--s)); height: calc(22 * var(--s)); stroke:#fff; }
+.benefit h4 { font-family:'SG',sans-serif; font-weight:700; font-size: calc(20 * var(--s)); color: var(--ink); margin-bottom: calc(10 * var(--s)); }
+.benefit p { font-family:'JB',monospace; font-size: calc(14.5 * var(--s)); line-height:1.7; color: var(--sub); }
+
+/* ─── Testimonials ─── */
+.testi {
+  background:#0a0a0a; border:1px solid rgba(255,255,255,.09);
+  padding: calc(36 * var(--s)) calc(30 * var(--s));
+  display:flex; flex-direction:column; gap: calc(22 * var(--s));
+  transition: border-color .35s, transform .35s;
+}
+.testi:hover { border-color: var(--red); transform: translateY(calc(-4 * var(--s))); }
+.testi .trate { font-family:'JB',monospace; font-size: calc(14 * var(--s)); letter-spacing:.24em; color: var(--red); }
+.testi blockquote { font-family:'JB',monospace; font-size: calc(15.5 * var(--s)); line-height:1.85; color: var(--sub); flex:1; }
+.testi .twho { border-top:1px solid rgba(255,255,255,.09); padding-top: calc(24 * var(--s)); }
+.testi .twho b { font-family:'SG',sans-serif; font-weight:700; font-size: calc(18 * var(--s)); color: var(--ink); display:block; }
+.testi .twho span { font-family:'JB',monospace; font-size: calc(13 * var(--s)); color: var(--lab); }
+
+/* ─── CTA + footer ─── */
+.final-cta {
+  padding: calc(140 * var(--s)) calc(73 * var(--s));
+  border-top:1px solid rgba(255,255,255,.08);
+  background: radial-gradient(50% 80% at 50% 0%, rgba(200,27,28,.14), transparent 70%), #050505;
+  text-align:left;
+}
+.final-cta h2 { font-family:'SG',sans-serif; font-weight:700; font-size: calc(54 * var(--s)); line-height:1.05; letter-spacing:calc(-1.8 * var(--s)); color: var(--ink); max-width: calc(820 * var(--s)); }
+.final-cta h2 em { font-style:normal; color: var(--red); }
+.final-cta p { font-family:'JB',monospace; font-size: calc(17 * var(--s)); color: var(--sub); margin-top: calc(24 * var(--s)); max-width: calc(600 * var(--s)); line-height:1.75; }
+.cta-row { display:flex; gap: calc(16 * var(--s)); margin-top: calc(44 * var(--s)); flex-wrap:wrap; }
+.cta-row .btn { position:static; width:auto; }
+.btn-outline {
+  display:inline-flex; align-items:center; height:calc(58 * var(--s));
+  padding:0 calc(26 * var(--s)); background:transparent;
+  border:1px solid rgba(255,255,255,.35); color:var(--ink);
+  font-family:'SG',sans-serif; font-weight:480; font-size:calc(20 * var(--s));
+  text-decoration:none; letter-spacing:.01em;
+  transition: border-color .3s, background .3s;
+}
+.btn-outline:hover { border-color: var(--red); }
+footer.site {
+  border-top:1px solid rgba(255,255,255,.08);
+  padding: calc(56 * var(--s)) calc(73 * var(--s));
+  display:flex; justify-content:space-between; align-items:center; gap: calc(30 * var(--s));
+  flex-wrap:wrap;
+}
+footer.site .fbrand { font-family:'SG',sans-serif; font-weight:700; font-size: calc(20 * var(--s)); color: var(--ink); }
+footer.site .fbrand em { font-style:normal; color: var(--red); }
+footer.site .fmeta { font-family:'JB',monospace; font-size: calc(13.5 * var(--s)); color: var(--lab); }
+footer.site .fmeta a { color: var(--sub); }
+footer.site .fmeta a:hover { color: var(--red); }
+
+/* ─── Scroll reveal ─── */
+.reveal { opacity:0; transform: translateY(calc(28 * var(--s))); transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); }
+.reveal.in { opacity:1; transform:none; }
+@media (prefers-reduced-motion: reduce){ .reveal { opacity:1 !important; transform:none !important; transition:none !important; } }
+
+@media (max-width:900px){
+  .sec, .slogan, .final-cta, footer.site { padding-left: calc(28 * var(--s)); padding-right: calc(28 * var(--s)); }
+  .grid3 { grid-template-columns:1fr; }
+  .grid2 { grid-template-columns:1fr; }
+  .sec-head h2 { font-size: calc(40 * var(--s)); }
+  .slogan .sl-big { font-size: calc(42 * var(--s)); }
+  .final-cta h2 { font-size: calc(38 * var(--s)); }
+}
+@media (max-width:599px){
+  .sec { padding-top: calc(90 * var(--s)); padding-bottom: calc(90 * var(--s)); }
+  .grid2, .grid3 { margin-top: calc(50 * var(--s)); }
+}
 </style>
 </head>
 <body>
@@ -569,14 +704,15 @@ html.intro .hero h1 .ln span { transform: translateY(120%); }
         </svg>
       </a>
 
-      <nav aria-label="Primary">
-        <a href="#">Home</a>
-        <a href="#resources">Resources
+<nav aria-label="Primary">
+        <a href="#top">Home</a>
+        <a href="#services">Services
           <span class="chev"><svg viewBox="0 0 11 6" fill="none"><path d="M1 1L5.5 5L10 1" stroke="currentColor" stroke-width="1.7"/></svg></span>
         </a>
         <a href="#benefits">Benefits
           <span class="chev"><svg viewBox="0 0 11 6" fill="none"><path d="M1 1L5.5 5L10 1" stroke="currentColor" stroke-width="1.7"/></svg></span>
         </a>
+        <a href="#reviews">Reviews</a>
         <a href="#contact">Contact</a>
       </nav>
 
@@ -644,14 +780,15 @@ html.intro .hero h1 .ln span { transform: translateY(120%); }
     <div class="menu-inn">
       <div class="menu-eyebrow">Menu</div>
       <div class="mrow" data-go="top">Home</div>
-      <button class="mrow" data-acc="res">
-        Resources <span class="plus">+</span>
+      <button class="mrow" data-acc="ser">
+        Services <span class="plus">+</span>
       </button>
-      <div class="macc" id="mres">
+      <div class="macc" id="mser">
         <div>
-          <a href="#resources">Documentation</a>
-          <a href="#resources">Threat reports</a>
-          <a href="#resources">Changelog</a>
+          <a href="#services">Auditoría de seguridad</a>
+          <a href="#services">Protección &amp; hardening</a>
+          <a href="#services">Respuesta a incidentes</a>
+          <a href="#services">Monitoreo continuo</a>
         </div>
       </div>
       <button class="mrow" data-acc="ben">
@@ -659,11 +796,12 @@ html.intro .hero h1 .ln span { transform: translateY(120%); }
       </button>
       <div class="macc" id="mben">
         <div>
-          <a href="#benefits">Continuous monitoring</a>
-          <a href="#benefits">Access control</a>
-          <a href="#benefits">Incident response</a>
+          <a href="#benefits">Sin sorpresas</a>
+          <a href="#benefits">Cumplimiento normativo</a>
+          <a href="#benefits">Disponibilidad real</a>
         </div>
       </div>
+      <div class="mrow" data-go="reviews">Reviews</div>
       <div class="mrow" data-go="contact">Contact</div>
       <div class="menu-foot">
         <button class="btn-menu" type="button" onclick="openChat(); closeMenu();">
@@ -674,6 +812,174 @@ html.intro .hero h1 .ln span { transform: translateY(120%); }
       </div>
     </div>
   </div>
+</div>
+
+<!-- ══════════════════ SCROLL CONTENT ══════════════════ -->
+<div class="content" aria-label="Sebastián Bruno — soluciones de ciberseguridad">
+
+  <!-- Slogan -->
+  <section class="slogan" id="slogan">
+    <span class="sl-tag">Slogan</span>
+    <div class="sl-big reveal">Seguridad que no se promete:<br><em>se verifica, se mide, y se mantiene.</em></div>
+    <p class="sl-motto">JUAN DAVID HERRERA — INGENIERO DE CIBERSEGURIDAD</p>
+  </section>
+
+  <!-- What we sell / services -->
+  <section class="sec" id="services">
+    <div class="sec-head">
+      <span class="eyebrow">01 — What I sell</span>
+      <h2>Servicios de ciberseguridad<br>a la medida de tu empresa</h2>
+      <p>Auditorías, protección y respuesta ante incidentes para que tu operación no se detenga. Cada servicio se entrega con evidencia, reporte y plan de acción.</p>
+    </div>
+    <div class="grid3">
+      <div class="pick reveal">
+        <div class="pnum">/01</div>
+        <h3>Auditoría de seguridad</h3>
+        <p>Evaluación completa de infraestructura, aplicaciones y procesos. Detecto vulnerabilidades antes de que lo hagan los atacantes.</p>
+        <div class="pfoot">Desde 5 días hábiles</div>
+      </div>
+      <div class="pick reveal">
+        <div class="pnum">/02</div>
+        <h3>Protección & hardening</h3>
+        <p>Refuerzo de servidores, redes y endpoints. Configuración segura por defecto y monitoreo continuo.</p>
+        <div class="pfoot">Endurecimiento real</div>
+      </div>
+      <div class="pick reveal">
+        <div class="pnum">/03</div>
+        <h3>Respuesta a incidentes</h3>
+        <p>Contención, análisis forense y recuperación cuando el ataque ya ocurrió. Minimizo el daño y el tiempo de inactividad.</p>
+        <div class="pfoot">Disponible 24/7</div>
+      </div>
+      <div class="pick reveal">
+        <div class="pnum">/04</div>
+        <h3>Monitoreo continuo</h3>
+        <p>Vigilancia 24/7 de tu infraestructura con detección de amenazas en tiempo real y alertas accionables.</p>
+        <div class="pfoot">Alertas en vivo</div>
+      </div>
+      <div class="pick reveal">
+        <div class="pnum">/05</div>
+        <h3>Capacitación del equipo</h3>
+        <p>Formación práctica para que tu equipo reconozca el phishing y las tácticas de ingeniería social antes de caer.</p>
+        <div class="pfoot">Equipo blindado</div>
+      </div>
+      <div class="pick reveal">
+        <div class="pnum">/06</div>
+        <h3>Consultoría estratégica</h3>
+        <p>Roadmap de ciberseguridad alineado con tu negocio, cumplimiento normativo y gestión de riesgos.</p>
+        <div class="pfoot">Plan de acción</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits -->
+  <section class="sec" id="benefits">
+    <div class="sec-head">
+      <span class="eyebrow">02 — Benefits</span>
+      <h2>Lo que ganas al trabajar conmigo</h2>
+      <p>No vendo reportes largos: vendo tranquilidad operativa, cumplimiento y protección real de lo que más vale para tu negocio.</p>
+    </div>
+    <div class="grid2">
+      <div class="benefit reveal">
+        <div class="bic"><svg viewBox="0 0 22 22" fill="none"><path d="M4 11l5 5L18 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div>
+          <h4>Sin sorpresas</h4>
+          <p>Sabes exactamente qué está expuesto y qué se debe corregir, en orden de prioridad.</p>
+        </div>
+      </div>
+      <div class="benefit reveal">
+        <div class="bic"><svg viewBox="0 0 22 22" fill="none"><path d="M4 11l5 5L18 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div>
+          <h4>Menores costos de falla</h4>
+          <p>Un incidente prevenido cuesta una fracción de lo que cuesta uno ya consumado.</p>
+        </div>
+      </div>
+      <div class="benefit reveal">
+        <div class="bic"><svg viewBox="0 0 22 22" fill="none"><path d="M4 11l5 5L18 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div>
+          <h4>Cumplimiento normativo</h4>
+          <p>Documentación y controles que te respaldan frente a auditorías y reguladores.</p>
+        </div>
+      </div>
+      <div class="benefit reveal">
+        <div class="bic"><svg viewBox="0 0 22 22" fill="none"><path d="M4 11l5 5L18 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div>
+          <h4>Lenguaje claro</h4>
+          <p>Reportes que entiende la dirección y que tu equipo técnico puede ejecutar de inmediato.</p>
+        </div>
+      </div>
+      <div class="benefit reveal">
+        <div class="bic"><svg viewBox="0 0 22 22" fill="none"><path d="M4 11l5 5L18 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div>
+          <h4>Disponibilidad real</h4>
+          <p>Estás a un mensaje o una llamada de distancia cuando algo se siente mal en tu sistema.</p>
+        </div>
+      </div>
+      <div class="benefit reveal">
+        <div class="bic"><svg viewBox="0 0 22 22" fill="none"><path d="M4 11l5 5L18 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div>
+          <h4>Enfoque en resultados</h4>
+          <p>Cada recomendación se traduce en una métrica: tiempo de respuesta, riesgo reducido, costo evitado.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section class="sec" id="reviews">
+    <div class="sec-head">
+      <span class="eyebrow">03 — Reviews</span>
+      <h2>Reseñas de clientes</h2>
+      <p>300+ clientes asesorados, 99% de satisfacción y más de $5M en pérdidas evitadas. Esto dicen algunos de ellos.</p>
+    </div>
+    <div class="grid3">
+      <div class="testi reveal">
+        <div class="trate">★★★★★</div>
+        <blockquote>"Auditó toda nuestra infraestructura en una semana y encontró vulnerabilidades que dos proveedores anteriores pasaron por alto. Plan de acción impecable."</blockquote>
+        <div class="twho">
+          <b>Laura Gómez</b>
+          <span>CTO — Fintech</span>
+        </div>
+      </div>
+      <div class="testi reveal">
+        <div class="trate">★★★★★</div>
+        <blockquote>"Nos tocó un incidente un viernes a las 11 pm. Contención en minutos, forense completo y recuperación total antes del lunes. Así de simple."</blockquote>
+        <div class="twho">
+          <b>Carlos Ramírez</b>
+          <span>Director de TI — Retail</span>
+        </div>
+      </div>
+      <div class="testi reveal">
+        <div class="trate">★★★★★</div>
+        <blockquote>"La capacitación cambió la cultura de la empresa. El phishing simulado pasó de 40% de clics a menos del 5% en dos meses."</blockquote>
+        <div class="twho">
+          <b>Ana Torres</b>
+          <span>Gerente General — SaaS</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="final-cta" id="contact">
+    <h2>Protege tu operación<br>antes del <em>primer incidente.</em></h2>
+    <p>Agenda una evaluación inicial gratuita. En 30 minutos sabrás tu nivel real de exposición y los siguientes pasos.</p>
+    <div class="cta-row">
+      <button class="btn btn-cta" type="button" onclick="openChat()">
+        <span>Secure system</span>
+        <span class="arrow"><svg viewBox="0 0 22 18" fill="none"><path d="M0 9H20.1" stroke="#fff" stroke-width="2"/><path d="M12.1 1L20.1 9L12.1 17" stroke="#fff" stroke-width="2"/></svg></span>
+      </button>
+      <a class="btn btn-outline" href="https://wa.me/573148695674" target="_blank" rel="noopener">
+        <span>WhatsApp directo</span>
+      </a>
+    </div>
+  </section>
+
+  <footer class="site">
+<div class="fbrand">JUAN DAVID <em>HERRERA</em></div>
+        <div class="fmeta">
+          Bogotá, Colombia &nbsp;·&nbsp; <a href="mailto:jherrera2246@gmail.com">jherrera2246@gmail.com</a> &nbsp;·&nbsp; <a href="tel:+573148695674">+57 314 869 5674</a>
+        </div>
+  </footer>
 </div>
 
 <!-- Entrance arm (before paint) -->
@@ -739,7 +1045,7 @@ html.intro .hero h1 .ln span { transform: translateY(120%); }
       else openMenu();
     });
 
-    var accs = {'res':document.getElementById('mres'), 'ben':document.getElementById('mben')};
+    var accs = {'ser':document.getElementById('mser'), 'ben':document.getElementById('mben')};
     S.call(document.querySelectorAll('.mrow[data-acc]')).forEach(function(b){
       b.addEventListener('click', function(){
         var id = b.getAttribute('data-acc');
@@ -1008,6 +1314,20 @@ function bindChat(){
     </button>
   </div>
 </div>
+
+<!-- Scroll reveal -->
+<script>
+(function(){
+  var els = document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){ els.forEach(function(e){ e.classList.add('in'); }); return; }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+    });
+  }, { rootMargin:'0px 0px -10% 0px', threshold:0.08 });
+  els.forEach(function(e){ io.observe(e); });
+})();
+</script>
 
 </body>
 </html>
